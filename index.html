@@ -1,13 +1,501 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alternative Credit Scoring Platform</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreditFlow - Alternative Credit Scoring</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-shield-alt"></i>
+                <span>CreditFlow</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#assessment" class="nav-link">Assessment</a>
+                <a href="#results" class="nav-link">Results</a>
+                <a href="#impact" class="nav-link">Economic Impact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Unlock Financial Opportunities for <span class="highlight">49 Million Americans</span></h1>
+                <p>Revolutionary credit scoring using non-traditional data sources to create inclusive financial access and drive economic growth</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">49M</div>
+                        <div class="stat-label">Underserved Americans</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">60%</div>
+                        <div class="stat-label">Expected Repayment Rate</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">$2.3B</div>
+                        <div class="stat-label">Potential Annual Interest Revenue</div>
+                    </div>
+                </div>
+                <button class="cta-button" onclick="startAssessment()">
+                    <i class="fas fa-rocket"></i>
+                    Start Credit Assessment
+                </button>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-card">
+                    <div class="card-header">Alternative Credit Score</div>
+                    <div class="score-display">
+                        <div class="score-number">742</div>
+                        <div class="score-status approved">APPROVED</div>
+                    </div>
+                    <div class="score-factors">
+                        <div class="factor">
+                            <span>Rent Payments</span>
+                            <div class="factor-bar">
+                                <div class="factor-fill" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="factor">
+                            <span>Utility Bills</span>
+                            <div class="factor-bar">
+                                <div class="factor-fill" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div class="factor">
+                            <span>Cash Flow</span>
+                            <div class="factor-bar">
+                                <div class="factor-fill" style="width: 76%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Assessment Form -->
+    <section id="assessment" class="assessment-section">
+        <div class="container">
+            <h2>Alternative Credit Assessment</h2>
+            <p class="section-subtitle">Provide your non-traditional financial data for comprehensive evaluation</p>
+            
+            <div class="form-container">
+                <form id="creditForm">
+                    <!-- Personal Information -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-user"></i> Personal Information</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" id="fullName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Age</label>
+                                <input type="number" id="age" min="18" max="100" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Annual Income ($)</label>
+                                <input type="number" id="income" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Employment Status</label>
+                                <select id="employment" required>
+                                    <option value="">Select Status</option>
+                                    <option value="full-time">Full-time</option>
+                                    <option value="part-time">Part-time</option>
+                                    <option value="self-employed">Self-employed</option>
+                                    <option value="student">Student</option>
+                                    <option value="freelancer">Freelancer</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rent & Housing -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-home"></i> Rent & Housing History</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Monthly Rent ($)</label>
+                                <input type="number" id="monthlyRent" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Months at Current Address</label>
+                                <input type="number" id="monthsAtAddress" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label>On-time Rent Payments (%)</label>
+                                <input type="number" id="rentPaymentRate" min="0" max="100" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Housing Type</label>
+                                <select id="housingType" required>
+                                    <option value="">Select Type</option>
+                                    <option value="apartment">Apartment</option>
+                                    <option value="house">House</option>
+                                    <option value="condo">Condo</option>
+                                    <option value="shared">Shared Housing</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Utilities & Bills -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-bolt"></i> Utility & Bill Payments</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Average Monthly Utility Bill ($)</label>
+                                <input type="number" id="utilityBill" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Utility Payment Reliability (%)</label>
+                                <input type="number" id="utilityReliability" min="0" max="100" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone Bill Payment History (%)</label>
+                                <input type="number" id="phonePayments" min="0" max="100" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Internet/Cable Payments (%)</label>
+                                <input type="number" id="internetPayments" min="0" max="100" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Banking & Cash Flow -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-university"></i> Banking & Cash Flow</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Average Monthly Bank Balance ($)</label>
+                                <input type="number" id="bankBalance" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Months with Current Bank</label>
+                                <input type="number" id="bankRelationship" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Monthly Savings Rate (%)</label>
+                                <input type="number" id="savingsRate" min="0" max="100" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Overdraft Incidents (Last 12 months)</label>
+                                <input type="number" id="overdrafts" min="0" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Education & Skills -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-graduation-cap"></i> Education & Professional Skills</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Highest Education Level</label>
+                                <select id="education" required>
+                                    <option value="">Select Level</option>
+                                    <option value="high-school">High School</option>
+                                    <option value="some-college">Some College</option>
+                                    <option value="associate">Associate Degree</option>
+                                    <option value="bachelor">Bachelor's Degree</option>
+                                    <option value="master">Master's Degree</option>
+                                    <option value="doctorate">Doctorate</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Professional Certifications</label>
+                                <input type="number" id="certifications" min="0" placeholder="Number of certifications">
+                            </div>
+                            <div class="form-group">
+                                <label>Years of Work Experience</label>
+                                <input type="number" id="workExperience" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Current Job Tenure (months)</label>
+                                <input type="number" id="jobTenure" min="0" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social & Digital Footprint -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-network-wired"></i> Digital & Social Presence</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>LinkedIn Connections</label>
+                                <input type="number" id="linkedinConnections" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label>Professional References</label>
+                                <input type="number" id="references" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label>Online Shopping History (years)</label>
+                                <input type="number" id="shoppingHistory" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label>Digital Payment Usage</label>
+                                <select id="digitalPayments">
+                                    <option value="">Select Usage</option>
+                                    <option value="never">Never</option>
+                                    <option value="rarely">Rarely</option>
+                                    <option value="sometimes">Sometimes</option>
+                                    <option value="frequently">Frequently</option>
+                                    <option value="always">Always</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Transportation & Mobility -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-car"></i> Transportation & Mobility</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Vehicle Ownership</label>
+                                <select id="vehicleOwnership">
+                                    <option value="">Select Status</option>
+                                    <option value="own-outright">Own Outright</option>
+                                    <option value="financing">Financing</option>
+                                    <option value="lease">Lease</option>
+                                    <option value="none">No Vehicle</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Insurance Payment History (%)</label>
+                                <input type="number" id="insurancePayments" min="0" max="100">
+                            </div>
+                            <div class="form-group">
+                                <label>Public Transit Usage</label>
+                                <select id="publicTransit">
+                                    <option value="">Select Usage</option>
+                                    <option value="never">Never</option>
+                                    <option value="rarely">Rarely</option>
+                                    <option value="sometimes">Sometimes</option>
+                                    <option value="frequently">Frequently</option>
+                                    <option value="daily">Daily</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Ride-sharing Usage</label>
+                                <select id="ridesharing">
+                                    <option value="">Select Usage</option>
+                                    <option value="never">Never</option>
+                                    <option value="rarely">Rarely</option>
+                                    <option value="sometimes">Sometimes</option>
+                                    <option value="frequently">Frequently</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-button">
+                        <i class="fas fa-calculator"></i>
+                        Calculate My Credit Score
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results" class="results-section" style="display: none;">
+        <div class="container">
+            <h2>Your Alternative Credit Assessment</h2>
+            
+            <div class="results-grid">
+                <!-- Credit Score Display -->
+                <div class="score-card">
+                    <div class="score-header">
+                        <h3>Your Credit Score</h3>
+                        <div class="score-badge" id="scoreBadge">CALCULATING...</div>
+                    </div>
+                    <div class="score-circle">
+                        <div class="score-value" id="scoreValue">---</div>
+                        <div class="score-range">300-850</div>
+                    </div>
+                    <div class="score-status" id="scoreStatus">
+                        <i class="fas fa-hourglass-half"></i>
+                        Processing your data...
+                    </div>
+                </div>
+
+                <!-- Interactive Pie Chart -->
+                <div class="chart-card">
+                    <h3>Score Breakdown - Where to Improve</h3>
+                    <div class="chart-container">
+                        <canvas id="scoreChart"></canvas>
+                    </div>
+                    <div class="chart-legend" id="chartLegend"></div>
+                </div>
+
+                <!-- Improvement Recommendations -->
+                <div class="recommendations-card">
+                    <h3><i class="fas fa-lightbulb"></i> Improvement Recommendations</h3>
+                    <div id="recommendations" class="recommendations-list">
+                        <!-- Recommendations will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Loan Eligibility -->
+                <div class="eligibility-card">
+                    <h3><i class="fas fa-check-circle"></i> Loan Eligibility</h3>
+                    <div id="loanEligibility" class="eligibility-content">
+                        <!-- Eligibility content will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Economic Impact Section -->
+    <section id="impact" class="impact-section">
+        <div class="container">
+            <h2>Economic Impact & Business Case</h2>
+            <p class="section-subtitle">How alternative credit scoring drives economic growth and bank profitability</p>
+            
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Market Opportunity</h3>
+                    <div class="impact-stat">49 Million</div>
+                    <p>Underserved Americans with insufficient credit history who could access loans through alternative scoring</p>
+                </div>
+
+                <div class="impact-card">
+                    <div class="impact-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <h3>Expected Repayment Rate</h3>
+                    <div class="impact-stat">60%</div>
+                    <p>Conservative estimate of successful loan repayments based on alternative data analysis and pilot programs</p>
+                </div>
+
+                <div class="impact-card">
+                    <div class="impact-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3>Revenue Potential</h3>
+                    <div class="impact-stat">$2.3B</div>
+                    <p>Annual interest revenue potential from serving the underbanked population with average loan amounts</p>
+                </div>
+
+                <div class="impact-card">
+                    <div class="impact-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Economic Growth</h3>
+                    <div class="impact-stat">0.3%</div>
+                    <p>Estimated GDP growth from increased financial inclusion and consumer spending power</p>
+                </div>
+            </div>
+
+            <div class="business-case">
+                <h3>The Business Case for Banks</h3>
+                <div class="case-points">
+                    <div class="case-point">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                        <div>
+                            <h4>Market Expansion</h4>
+                            <p>Access to 49 million previously unservable customers represents a massive untapped market</p>
+                        </div>
+                    </div>
+                    <div class="case-point">
+                        <i class="fas fa-shield-alt"></i>
+                        <div>
+                            <h4>Risk Mitigation</h4>
+                            <p>Alternative data provides more comprehensive risk assessment than traditional credit scores alone</p>
+                        </div>
+                    </div>
+                    <div class="case-point">
+                        <i class="fas fa-coins"></i>
+                        <div>
+                            <h4>Profitability</h4>
+                            <p>60% repayment rate on $47B in potential loans generates substantial interest revenue</p>
+                        </div>
+                    </div>
+                    <div class="case-point">
+                        <i class="fas fa-heart"></i>
+                        <div>
+                            <h4>Social Impact</h4>
+                            <p>Promoting financial inclusion while maintaining profitable operations and regulatory compliance</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="roi-calculator">
+                <h3>ROI Calculator for Banks</h3>
+                <div class="calculator-grid">
+                    <div class="calc-input">
+                        <label>Average Loan Amount ($)</label>
+                        <input type="number" id="avgLoanAmount" value="15000" min="1000">
+                    </div>
+                    <div class="calc-input">
+                        <label>Interest Rate (%)</label>
+                        <input type="number" id="interestRate" value="12" min="1" max="30" step="0.1">
+                    </div>
+                    <div class="calc-input">
+                        <label>Number of Loans</label>
+                        <input type="number" id="numLoans" value="10000" min="100">
+                    </div>
+                    <div class="calc-result">
+                        <div class="result-label">Annual Interest Revenue</div>
+                        <div class="result-value" id="annualRevenue">$18,000,000</div>
+                    </div>
+                </div>
+                <button onclick="calculateROI()" class="calc-button">Recalculate ROI</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Model Information -->
+    <section class="ai-model-section">
+        <div class="container">
+            <h2>AI Model Training & Implementation</h2>
+            <div class="ai-info-grid">
+                <div class="ai-card">
+                    <h3><i class="fas fa-brain"></i> Machine Learning Approach</h3>
+                    <ul>
+                        <li>Gradient Boosting (XGBoost/LightGBM) for high accuracy</li>
+                        <li>Random Forest for feature importance analysis</li>
+                        <li>Neural Networks for complex pattern recognition</li>
+                        <li>Ensemble methods for robust predictions</li>
+                    </ul>
+                </div>
+                <div class="ai-card">
+                    <h3><i class="fas fa-database"></i> Training Data Sources</h3>
+                    <ul>
+                        <li>Rent payment histories from property management companies</li>
+                        <li>Utility payment data from service providers</li>
+                        <li>Banking transaction patterns and cash flow analysis</li>
+                        <li>Employment verification and income stability metrics</li>
+                    </ul>
+                </div>
+                <div class="ai-card">
+                    <h3><i class="fas fa-balance-scale"></i> Fairness & Compliance</h3>
+                    <ul>
+                        <li>Bias detection and mitigation algorithms</li>
+                        <li>GDPR and CCPA compliant data handling</li>
+                        <li>Explainable AI for regulatory transparency</li>
+                        <li>Regular model auditing and validation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
 </html>
